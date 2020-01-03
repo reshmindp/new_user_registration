@@ -29,30 +29,30 @@ else
 <?php
 include 'dbconnection.php';
 session_start();
-
+ 
 
 if(isset($_POST['subm']))
 {
   $username = $_POST['uname'];
   $password = $_POST['passw'];
 
-  $query = mysqli_query($connection, "SELECT * FROM `tbl_login` WHERE username = '$username' AND password = '$password'");
+  $query = mysqli_query($connection,"SELECT * FROM `tbl_user_login` WHERE username = '$username' AND password = '$password'");
 
   if(mysqli_num_rows($query) > 0)
   {
+    $row_data = mysqli_fetch_assoc($query);
+
+    $_SESSION['user_id'] =  $row_data['login_id']; 
 
     
-
-    header('location: single_data.php');
-
+    header("location: single_data.php");
   }
-  else
-  {
-    echo "<script>alert('Invalid user details!');</script>";
+  else{
+
 
   }
 
-}
+} 
 
 
 
